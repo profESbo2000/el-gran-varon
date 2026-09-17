@@ -122,22 +122,18 @@
             padding-bottom: 5px;
         }
 
-        /* Video Container Responsivo */
-        .video-container {
-            position: relative;
-            padding-bottom: 56.25%;
-            height: 0;
-            overflow: hidden;
-            border-radius: 12px;
+        /* Contenedor del reproductor de video alojado */
+        .video-wrapper {
             margin: 20px 0;
+            text-align: center;
         }
 
-        .video-container iframe {
-            position: absolute;
-            top: 0;
-            left: 0;
+        .video-wrapper video {
             width: 100%;
-            height: 100%;
+            max-width: 800px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            background-color: #000;
         }
 
         .lyrics-section {
@@ -348,24 +344,18 @@
                 <div class="step-number">2</div>
                 <h2>Escucha la Canción y Trabaja la Letra</h2>
             </div>
+            
+            <!-- REPRODUCTOR DE VIDEO ALOJADO EN GITHUB -->
+            <div class="video-wrapper">
+                <video controls>
+                    <source src="video.mp4" type="video/mp4">
+                    Tu navegador no soporta la reproducción de video HTML5.
+                </video>
+            </div>
 
-            <div class="video-container">
-    <iframe 
-        src="https://www.youtube-nocookie.com/embed/p17J35l5K20" 
-        title="Willie Colon - El Gran Varon" 
-        frameborder="0" 
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-        referrerpolicy="strict-origin-when-cross-origin"
-        allowfullscreen>
-    </iframe>
-</div>
-            <!-- REPRODUCTOR DE VIDEO DIRECTO DESDE GITHUB -->
-<div class="video-container">
-    <video controls style="width: 100%; border-radius: 12px; display: block;">
-        <source src="video.mp4" type="video/mp4">
-        Tu navegador no soporta la reproducción de video HTML5.
-    </video>
-</div>
+            <p style="font-size: 0.9rem; color: #666; text-align: center; margin-bottom: 25px;">
+                <em>Puedes buscar la letra completa en Google para seguir toda la canción durante la sesión.</em>
+            </p>
 
             <!-- ACTIVIDAD A: SELECCIONAR -->
             <h3 style="color: var(--primary); margin-bottom: 10px;">Parte 2A: Selecciona la opción correcta (El Nacimiento)</h3>
