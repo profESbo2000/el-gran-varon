@@ -17,6 +17,8 @@
             --card-bg: #FFFFFF;
             --text: #2B2D42;
             --accent: #E63946;
+            --success: #2E7D32;
+            --error: #D32F2F;
         }
 
         * {
@@ -122,7 +124,6 @@
             padding-bottom: 5px;
         }
 
-        /* Contenedor del reproductor de video alojado */
         .video-wrapper {
             margin: 20px 0;
             text-align: center;
@@ -142,7 +143,7 @@
             border-radius: 12px;
             border: 1px solid #E9ECEF;
             margin-bottom: 20px;
-            line-height: 2.2;
+            line-height: 2.3;
             font-size: 1.05rem;
         }
 
@@ -172,14 +173,43 @@
             border-bottom: 2px solid var(--primary);
             background: transparent;
             font-weight: bold;
-            color: var(--accent);
+            color: var(--dark);
             padding: 2px 5px;
             outline: none;
+            transition: all 0.3s ease;
         }
 
         input.fill-input {
-            width: 130px;
+            width: 140px;
             text-align: center;
+        }
+
+        /* Estilos de Validación */
+        .is-valid {
+            border-bottom: 3px solid var(--success) !important;
+            background-color: #E8F5E9 !important;
+            color: var(--success) !important;
+        }
+
+        .is-invalid {
+            border-bottom: 3px solid var(--error) !important;
+            background-color: #FFEBEE !important;
+            color: var(--error) !important;
+        }
+
+        .feedback-tag {
+            font-size: 0.85rem;
+            font-weight: bold;
+            margin-left: 5px;
+            display: inline-block;
+        }
+
+        .feedback-tag.correct {
+            color: var(--success);
+        }
+
+        .feedback-tag.incorrect {
+            color: var(--error);
         }
 
         .match-grid {
@@ -323,18 +353,18 @@
                 <div class="step-number">1</div>
                 <h2>El Misterio: Noticia de ÚLTIMA HORA</h2>
             </div>
-            <p>Lee el siguiente titular del periódico de Nueva York de 1986 antes de escuchar la canción:</p>
+            <p>Lee el siguiente titular sobre la historia antes de escuchar la canción:</p>
             
             <div class="newspaper">
-                <h3>📰 THE NEW YORK DAILY (1986)</h3>
-                <p><strong>"Un padre viaja desde Latinoamérica para reencontrarse con su hijo tras 8 años de silencio. Al llegar al restaurante de la cita, el padre se levanta y se va sin decir una sola palabra."</strong></p>
+                <h3>📰 THE NEW YORK DAILY</h3>
+                <p><strong>"Un padre viaja desde su país para reencontrarse con su hijo tras años de silencio. Al encontrarlo en la ciudad, el padre no acepta su nueva identidad, se aleja y lo abandona para siempre."</strong></p>
             </div>
 
             <p><strong>🤔 Especula usando los adverbios de duda:</strong></p>
             <ul style="margin-left: 20px; margin-top: 10px;">
-                <li><em>A lo mejor...</em> pasó algo grave entre ellos.</li>
-                <li><em>Puede que...</em> el hijo descubriera un secreto.</li>
-                <li><em>Igual...</em> el padre no reconoció a su hijo. ¿Por qué?</li>
+                <li><em>A lo mejor...</em> el padre esperaba ver al mismo niño de antes.</li>
+                <li><em>Puede que...</em> las expectativas de la familia fueran muy estrictas.</li>
+                <li><em>Igual...</em> el paso del tiempo cambió la vida de ambos. ¿Por qué?</li>
             </ul>
         </div>
 
@@ -357,82 +387,119 @@
                 <em>Puedes buscar la letra completa en Google para seguir toda la canción durante la sesión.</em>
             </p>
 
-            <!-- ACTIVIDAD A: SELECCIONAR -->
-            <h3 style="color: var(--primary); margin-bottom: 10px;">Parte 2A: Selecciona la opción correcta (El Nacimiento)</h3>
+            <!-- ACTIVIDAD A: SELECCIÓN MÚLTIPLE AMPLIADA -->
+            <h3 style="color: var(--primary); margin-bottom: 10px;">Parte 2A: Selecciona la opción correcta (Infancia y Reencuentro)</h3>
             <div class="lyrics-section">
-                En la sala de un hospital, a los seis meses de gestación,<br>
-                nació el hijo de Doña Josefina y Don Andrés.<br>
-                El niño fue criado con 
-                <select class="select-input">
+                En la sala de un hospital, a las 9:43 nació 
+                <select class="select-input" data-answer="Simón" onchange="checkSelect(this)">
                     <option value="">--Selecciona--</option>
-                    <option value="rigor">rigor</option>
-                    <option value="amor">amor</option>
-                    <option value="temor">temor</option>
-                </select> 
-                y con la idea firme<br>
-                de que fuera un 
-                <select class="select-input">
+                    <option value="Simón">Simón</option>
+                    <option value="Andrés">Andrés</option>
+                    <option value="José">José</option>
+                </select><span class="feedback-tag"></span>.<br>
+                Es el verano del 
+                <select class="select-input" data-answer="'56" onchange="checkSelect(this)">
+                    <option value="">--Año--</option>
+                    <option value="'56">'56</option>
+                    <option value="'66">'66</option>
+                    <option value="'76">'76</option>
+                </select><span class="feedback-tag"></span>. 
+                El orgullo de don Andrés por ser 
+                <select class="select-input" data-answer="varón" onchange="checkSelect(this)">
                     <option value="">--Selecciona--</option>
-                    <option value="gran varón">gran varón</option>
-                    <option value="buen señor">buen señor</option>
-                    <option value="gran doctor">gran doctor</option>
-                </select>.
+                    <option value="varón">varón</option>
+                    <option value="doctor">doctor</option>
+                    <option value="mayor">mayor</option>
+                </select><span class="feedback-tag"></span>.<br>
+                Fue criado con mano dura, con 
+                <select class="select-input" data-answer="severidad" onchange="checkSelect(this)">
+                    <option value="">--Modo--</option>
+                    <option value="severidad">severidad</option>
+                    <option value="suavidad">suavidad</option>
+                    <option value="libertad">libertad</option>
+                </select><span class="feedback-tag"></span>, nunca opinó.<br><br>
+                
+                Cuenta la gente que un día el papá fue a visitarlo sin 
+                <select class="select-input" data-answer="avisar" onchange="checkSelect(this)">
+                    <option value="">--Acción--</option>
+                    <option value="avisar">avisar</option>
+                    <option value="llamar">llamar</option>
+                    <option value="pagar">pagar</option>
+                </select><span class="feedback-tag"></span>, ¡vaya qué error!<br>
+                Se dejó llevar por lo que dice la 
+                <select class="select-input" data-answer="gente" onchange="checkSelect(this)">
+                    <option value="">--Sustantivo--</option>
+                    <option value="gente">gente</option>
+                    <option value="prensa">prensa</option>
+                    <option value="familia">familia</option>
+                </select><span class="feedback-tag"></span>; su padre jamás le habló, lo abandonó para siempre.
             </div>
 
-            <!-- ACTIVIDAD B: RELLENAR HUECOS -->
-            <h3 style="color: var(--primary); margin-bottom: 10px; margin-top: 25px;">Parte 2B: Completa los espacios en blanco (El Viaje)</h3>
+            <!-- ACTIVIDAD B: RELLENAR HUECOS AMPLIADA -->
+            <h3 style="color: var(--primary); margin-bottom: 10px; margin-top: 25px;">Parte 2B: Completa los espacios en blanco (La Transformación y el Final)</h3>
             <div class="word-bank">
                 <strong>Banco de palabras:</strong>
-                <span class="word-tag">marchó</span>
-                <span class="word-tag">cambió</span>
-                <span class="word-tag">soñaba</span>
+                <span class="word-tag">extranjero</span>
+                <span class="word-tag">sermón</span>
+                <span class="word-tag">falda</span>
+                <span class="word-tag">carterón</span>
+                <span class="word-tag">limonada</span>
+                <span class="word-tag">enfermedad</span>
+                <span class="word-tag">'86</span>
             </div>
             <div class="lyrics-section">
-                A los treinta años Simón se <input type="text" class="fill-input" placeholder="verbo"> a Nueva York,<br>
-                buscando el futuro que tanto <input type="text" class="fill-input" placeholder="verbo">.<br>
-                Pero el mundo da vueltas y en el año 86,<br>
-                Don Andrés viajó y nada de lo que vio <input type="text" class="fill-input" placeholder="verbo">.
+                Al <input type="text" class="fill-input" data-answer="extranjero" oninput="checkInput(this)" placeholder="destino"> <span class="feedback-tag"></span> se fue Simón.<br>
+                Lejos de casa, se le olvidó aquel <input type="text" class="fill-input" data-answer="sermón" oninput="checkInput(this)" placeholder="enseñanza"> <span class="feedback-tag"></span>.<br>
+                Cambió la forma de caminar, usaba <input type="text" class="fill-input" data-answer="falda" oninput="checkInput(this)" placeholder="ropa"> <span class="feedback-tag"></span>, lápiz labial y un <input type="text" class="fill-input" data-answer="carterón" oninput="checkInput(this)" placeholder="accesorio"> <span class="feedback-tag"></span>.<br><br>
+
+                No te quejes Andrés, no te quejes por nada; si del cielo te caen limones aprende a hacer <input type="text" class="fill-input" data-answer="limonada" oninput="checkInput(this)" placeholder="bebida"> <span class="feedback-tag"></span>.<br>
+                En la sala de un hospital, de una extraña <input type="text" class="fill-input" data-answer="enfermedad" oninput="checkInput(this)" placeholder="condición"> <span class="feedback-tag"></span>, murió Simón.<br>
+                Es el verano del <input type="text" class="fill-input" data-answer="'86" oninput="checkInput(this)" placeholder="año"> <span class="feedback-tag"></span>, al enfermo de la cama 10 nadie lloró.
             </div>
 
             <!-- ACTIVIDAD C: VOCABULARIO Y ASOCIACIÓN -->
-            <h3 style="color: var(--primary); margin-bottom: 10px; margin-top: 25px;">Parte 2C: Relaciona el vocabulario (El Reencuentro)</h3>
-            <p style="font-size: 0.95rem; margin-bottom: 10px;">Asocia cada expresión clave del tema con su significado:</p>
+            <h3 style="color: var(--primary); margin-bottom: 10px; margin-top: 25px;">Parte 2C: Relaciona las expresiones clave</h3>
+            <p style="font-size: 0.95rem; margin-bottom: 10px;">Asocia cada frase o refrán con su verdadero significado:</p>
             <div class="match-grid">
                 <div class="match-card">
-                    <strong>1. "Criado con rigor"</strong>
-                    <select class="select-input" style="width: 100%; margin-top: 5px;">
+                    <strong>1. "Criado con mano dura"</strong>
+                    <select class="select-input" style="width: 100%; margin-top: 5px;" data-answer="a" onchange="checkSelect(this)">
                         <option value="">-- Significado --</option>
-                        <option>Educado de forma muy estricta y tradicional</option>
-                        <option>Nacer antes de tiempo en el hospital</option>
-                        <option>Aceptar a las personas tal como son</option>
+                        <option value="a">Educado de forma muy estricta y sin libertad de opinar</option>
+                        <option value="b">Nacer prematuro en un hospital público</option>
+                        <option value="c">Trabajar en el extranjero desde muy joven</option>
                     </select>
+                    <span class="feedback-tag"></span>
                 </div>
                 <div class="match-card">
-                    <strong>2. "Gran varón"</strong>
-                    <select class="select-input" style="width: 100%; margin-top: 5px;">
+                    <strong>2. "Palo que nace doblado..."</strong>
+                    <select class="select-input" style="width: 100%; margin-top: 5px;" data-answer="a" onchange="checkSelect(this)">
                         <option value="">-- Significado --</option>
-                        <option>Expectativa del padre de tener un hijo "macho/fuerte"</option>
-                        <option>Un hombre muy famoso en Nueva York</option>
-                        <option>Un médico importante</option>
+                        <option value="a">No se puede forzar la naturaleza ni la identidad propia de una persona</option>
+                        <option value="b">Un árbol que crece mal en el campo</option>
+                        <option value="c">Aprender un oficio igual al del padre</option>
                     </select>
+                    <span class="feedback-tag"></span>
                 </div>
                 <div class="match-card">
-                    <strong>3. "Nace pa' martillo..."</strong>
-                    <select class="select-input" style="width: 100%; margin-top: 5px;">
+                    <strong>3. "Si del cielo te caen limones..."</strong>
+                    <select class="select-input" style="width: 100%; margin-top: 5px;" data-answer="a" onchange="checkSelect(this)">
                         <option value="">-- Significado --</option>
-                        <option>No se puede luchar contra la verdadera esencia de alguien</option>
-                        <option>Trabajar en construcción</option>
-                        <option>Viajar lejos de la familia</option>
+                        <option value="a">Saber adaptarse y aprovechar las situaciones difíciles de la vida</option>
+                        <option value="b">Preparar bebidas durante el verano</option>
+                        <option value="c">Estar enojado con la familia por no recibir cartas</option>
                     </select>
+                    <span class="feedback-tag"></span>
                 </div>
                 <div class="match-card">
-                    <strong>4. "El mundo da vueltas"</strong>
-                    <select class="select-input" style="width: 100%; margin-top: 5px;">
+                    <strong>4. "El que esté libre de pecado..."</strong>
+                    <select class="select-input" style="width: 100%; margin-top: 5px;" data-answer="a" onchange="checkSelect(this)">
                         <option value="">-- Significado --</option>
-                        <option>La vida cambia inesperadamente con el tiempo</option>
-                        <option>Hacer un viaje alrededor del planeta</option>
-                        <option>Estar mareado por la música</option>
+                        <option value="a">Nadie debe juzgar a los demás, hay que tener compasión</option>
+                        <option value="b">No cometer errores durante la juventud</option>
+                        <option value="c">Olvidar los recuerdos tristes del pasado</option>
                     </select>
+                    <span class="feedback-tag"></span>
                 </div>
             </div>
         </div>
@@ -443,24 +510,24 @@
                 <div class="step-number">3</div>
                 <h2>La Línea del Tiempo de la Historia</h2>
             </div>
-            <p>Sigue la secuencia de los hechos a lo largo de los años:</p>
+            <p>Sigue la secuencia cronológica según la letra de la canción:</p>
 
             <div class="timeline">
                 <div class="timeline-item">
-                    <span class="timeline-date">1956 - El Nacimiento</span>
-                    <p>Nace Simón. ¿Qué expectativas tenía su padre Don Andrés? <em>(Que fuera un "gran varón")</em>.</p>
+                    <span class="timeline-date">Verano del '56 - El Nacimiento</span>
+                    <p>Nace Simón a las 9:43 en la sala de un hospital. Su padre Andrés sueña con que sea un "gran varón".</p>
                 </div>
                 <div class="timeline-item">
-                    <span class="timeline-date">1978 - El Viaje</span>
-                    <p>Simón se va a Nueva York a los 22 años. ¿Por qué se marcha de su hogar?</p>
+                    <span class="timeline-date">El Viaje y la Transformación</span>
+                    <p>Simón se va al extranjero. Olvida el sermón de su padre y transforma libremente su estilo e identidad.</p>
                 </div>
                 <div class="timeline-item">
-                    <span class="timeline-date">1986 - El Reencuentro</span>
-                    <p>Don Andrés viaja a Nueva York. ¿Con quién se encuentra en el restaurante?</p>
+                    <span class="timeline-date">El Encuentro Imprevisto</span>
+                    <p>Don Andrés va a visitarlo sin avisar. Simón lo saluda: <em>"¿Cómo te va? Soy Simón, tu hijo"</em>. Andrés lo rechaza y lo abandona.</p>
                 </div>
                 <div class="timeline-item">
-                    <span class="timeline-date">1989 - El Final</span>
-                    <p>Simón está en el hospital. ¿Qué ocurre con el padre antes de entrar a verlo?</p>
+                    <span class="timeline-date">Verano del '86 - El Final</span>
+                    <p>En la cama 10 de un hospital, Simón fallece de una extraña enfermedad en medio del olvido.</p>
                 </div>
             </div>
         </div>
@@ -471,21 +538,21 @@
                 <div class="step-number">4</div>
                 <h2>Análisis de Personajes y Debate</h2>
             </div>
-            <p>Discutan las posturas de los dos personajes principales de la canción:</p>
+            <p>Discutan las posturas de los dos personajes principales:</p>
 
             <div class="character-grid">
                 <div class="char-card">
                     <h4><i class="fa-solid fa-user-tie"></i> Don Andrés (El Padre)</h4>
                     <ul>
-                        <li>¿Es una persona mala o una víctima de su época y cultura?</li>
-                        <li>¿Qué habrías hecho tú en su lugar en 1986?</li>
+                        <li>¿Por qué se dejó llevar por "lo que dice la gente"?</li>
+                        <li>¿Qué significa la frase: <em>"El que nunca perdona tiene destino cierto de vivir amargos recuerdos en su propio infierno"</em>?</li>
                     </ul>
                 </div>
                 <div class="char-card">
-                    <h4><i class="fa-solid fa-user-heart"></i> Simón / Simona</h4>
+                    <h4><i class="fa-solid fa-user-heart"></i> Simón</h4>
                     <ul>
-                        <li>¿Por qué nunca le contó la verdad por carta a su padre?</li>
-                        <li>¿Qué sentía Simón en Nueva York durante esos 8 años?</li>
+                        <li>¿Por qué decidió marcharse al extranjero para vivir su vida?</li>
+                        <li>¿Qué mensaje nos deja la llamada a la compasión al final del tema?</li>
                     </ul>
                 </div>
             </div>
@@ -497,13 +564,13 @@
                 <div class="step-number">5</div>
                 <h2>Reflexión Cultural y Refranes</h2>
             </div>
-            <p>Analicen juntos el significado de esta famosa frase de la salsa:</p>
+            <p>Analicen juntos el significado de esta famosa enseñanza de la canción:</p>
 
             <div class="quote-box">
-                "No se puede corregir a la naturaleza... el que nace pa' martillo, del cielo le caen los clavos."
+                "Hay que tener compasión, basta ya de moraleja... el que esté libre de pecado, que tire la primera piedra."
             </div>
 
-            <p><strong>💬 Para conversar:</strong> ¿Existe algún refrán en tu cultura que hable de la importancia de aceptar a las personas tal como son?</p>
+            <p><strong>💬 Para conversar:</strong> ¿Cómo influyen los prejuicios sociales en las relaciones familiares en la actualidad?</p>
         </div>
 
         <!-- PASO 6: TAREA -->
@@ -514,13 +581,13 @@
             </div>
             
             <div class="homework-option">
-                <h3>Opción A: La carta no enviada (Escritura Creativa)</h3>
-                <p>Escribe una nota corta de Simón a su padre en 1986 (80-100 palabras) explicando por qué cambió su vida. Usa expresiones como <em>"Espero que...", "Ojalá...", "Puede que..."</em>.</p>
+                <h3>Opción A: Carta de Reconciliación (Escritura Creativa)</h3>
+                <p>Escribe una carta imaginaria que Don Andrés le habría enviado a Simón si hubiera decidido perdonarlo a tiempo (80-100 palabras).</p>
             </div>
 
             <div class="homework-option">
-                <h3>Opción B: El diario de Don Andrés (Reflexión)</h3>
-                <p>Escribe una entrada del diario de Don Andrés en 1989 expresando su arrepentimiento por haber dejado pasar el tiempo por orgullo.</p>
+                <h3>Opción B: Reflexión Personal</h3>
+                <p>Explica con tus propias palabras qué significa el refrán <em>"Si del cielo te caen limones, aprende a hacer limonada"</em> aplicado a una experiencia personal.</p>
             </div>
 
             <div style="margin-top: 20px;">
@@ -536,5 +603,57 @@
 
     </div>
 
+    <!-- SCRIPT DE VALIDACIÓN EN TIEMPO REAL -->
+    <script>
+        function checkSelect(element) {
+            const expected = element.getAttribute('data-answer');
+            const selected = element.value;
+            const feedback = element.nextElementSibling;
+
+            if (!selected) {
+                element.classList.remove('is-valid', 'is-invalid');
+                feedback.textContent = '';
+                feedback.className = 'feedback-tag';
+                return;
+            }
+
+            if (selected === expected) {
+                element.classList.add('is-valid');
+                element.classList.remove('is-invalid');
+                feedback.textContent = '✓ Correcto';
+                feedback.className = 'feedback-tag correct';
+            } else {
+                element.classList.add('is-invalid');
+                element.classList.remove('is-valid');
+                feedback.textContent = '✗ Inténtalo de nuevo';
+                feedback.className = 'feedback-tag incorrect';
+            }
+        }
+
+        function checkInput(element) {
+            const expected = element.getAttribute('data-answer').toLowerCase().trim();
+            const value = element.value.toLowerCase().trim();
+            const feedback = element.nextElementSibling;
+
+            if (value === '') {
+                element.classList.remove('is-valid', 'is-invalid');
+                feedback.textContent = '';
+                feedback.className = 'feedback-tag';
+                return;
+            }
+
+            if (value === expected) {
+                element.classList.add('is-valid');
+                element.classList.remove('is-invalid');
+                feedback.textContent = '✓ Correcto';
+                feedback.className = 'feedback-tag correct';
+            } else {
+                element.classList.add('is-invalid');
+                element.classList.remove('is-valid');
+                feedback.textContent = '✗ Incorrecto';
+                feedback.className = 'feedback-tag incorrect';
+            }
+        }
+    </script>
 </body>
 </html>
