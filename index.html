@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎵 El Gran Varón - Clase de Español B1</title>
+    <!-- Google Fonts & FontAwesome -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary: #FF5722;
+            --secondary: #FFC107;
+            --dark: #1E1E24;
+            --light: #F7F9FC;
+            --card-bg: #FFFFFF;
+            --text: #2B2D42;
+            --accent: #E63946;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background-color: var(--light);
+            color: var(--text);
+            line-height: 1.6;
+            padding: 20px;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            color: white;
+            text-align: center;
+            padding: 40px 20px;
+            border-radius: 20px;
+            box-shadow: 0 10px 20px rgba(255, 87, 34, 0.2);
+            margin-bottom: 30px;
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .badge {
+            background: var(--secondary);
+            color: var(--dark);
+            padding: 5px 15px;
+            border-radius: 50px;
+            font-weight: bold;
+            font-size: 0.9rem;
+            display: inline-block;
+            margin-top: 10px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .step-card {
+            background: var(--card-bg);
+            border-radius: 16px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            border-left: 6px solid var(--primary);
+            transition: transform 0.3s ease;
+        }
+
+        .step-card:hover {
+            transform: translateY(-3px);
+        }
+
+        .step-title {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+
+        .step-number {
+            background: var(--primary);
+            color: white;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+
+        .newspaper {
+            background: #FDFBF7;
+            border: 2px dashed #D3D3D3;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 15px 0;
+            font-family: 'Georgia', serif;
+        }
+
+        .newspaper h3 {
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 1.2rem;
+            margin-bottom: 8px;
+            border-bottom: 1px solid #CCC;
+            padding-bottom: 5px;
+        }
+
+        /* Video Container Responsivo */
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+            border-radius: 12px;
+            margin: 20px 0;
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .lyrics-section {
+            background: #F8F9FA;
+            padding: 20px;
+            border-radius: 12px;
+            border: 1px solid #E9ECEF;
+            margin-bottom: 20px;
+            line-height: 2.2;
+            font-size: 1.05rem;
+        }
+
+        .word-bank {
+            background: #FFF3CD;
+            border: 1px solid #FFEEBA;
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .word-tag {
+            background: var(--primary);
+            color: white;
+            padding: 3px 10px;
+            border-radius: 15px;
+            font-weight: bold;
+            font-size: 0.85rem;
+        }
+
+        select.select-input, input.fill-input {
+            border: none;
+            border-bottom: 2px solid var(--primary);
+            background: transparent;
+            font-weight: bold;
+            color: var(--accent);
+            padding: 2px 5px;
+            outline: none;
+        }
+
+        input.fill-input {
+            width: 130px;
+            text-align: center;
+        }
+
+        .match-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-top: 10px;
+        }
+
+        @media (max-width: 600px) {
+            .match-grid { grid-template-columns: 1fr; }
+        }
+
+        .match-card {
+            background: #FFF;
+            padding: 12px;
+            border-radius: 8px;
+            border: 1px solid #CBD5E1;
+        }
+
+        .timeline {
+            position: relative;
+            margin: 20px 0;
+            padding-left: 20px;
+            border-left: 3px solid var(--secondary);
+        }
+
+        .timeline-item {
+            margin-bottom: 20px;
+            position: relative;
+            padding-left: 15px;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -28px;
+            top: 5px;
+            width: 12px;
+            height: 12px;
+            background: var(--primary);
+            border-radius: 50%;
+        }
+
+        .timeline-date {
+            font-weight: bold;
+            color: var(--accent);
+        }
+
+        .character-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        @media (max-width: 600px) {
+            .character-grid { grid-template-columns: 1fr; }
+        }
+
+        .char-card {
+            background: #F8F9FA;
+            padding: 20px;
+            border-radius: 12px;
+            border: 1px solid #E9ECEF;
+        }
+
+        .char-card h4 {
+            color: var(--dark);
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .quote-box {
+            background: linear-gradient(135deg, #FFE3E0, #FFF3CD);
+            padding: 20px;
+            border-radius: 12px;
+            font-style: italic;
+            margin: 15px 0;
+            border-left: 4px solid var(--accent);
+        }
+
+        .homework-option {
+            background: #FFF;
+            border: 2px solid #E2E8F0;
+            border-radius: 10px;
+            padding: 15px;
+            margin-top: 15px;
+        }
+
+        textarea {
+            width: 100%;
+            height: 120px;
+            border: 1px solid #CCC;
+            border-radius: 8px;
+            padding: 10px;
+            margin-top: 10px;
+            resize: vertical;
+        }
+
+        button.btn-submit {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: background 0.2s;
+        }
+
+        button.btn-submit:hover {
+            background: #D84315;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            color: #777;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        
+        <!-- HEADER -->
+        <header>
+            <h1>🎵 El Gran Varón</h1>
+            <p>Willie Colón / Omar Alfanno • Historia, Lengua y Cultura</p>
+            <span class="badge">Nivel B1 • Comprensión, Vocabulario & Debate</span>
+        </header>
+
+        <!-- PASO 1: EL MISTERIO -->
+        <div class="step-card">
+            <div class="step-title">
+                <div class="step-number">1</div>
+                <h2>El Misterio: Noticia de ÚLTIMA HORA</h2>
+            </div>
+            <p>Lee el siguiente titular del periódico de Nueva York de 1986 antes de escuchar la canción:</p>
+            
+            <div class="newspaper">
+                <h3>📰 THE NEW YORK DAILY (1986)</h3>
+                <p><strong>"Un padre viaja desde Latinoamérica para reencontrarse con su hijo tras 8 años de silencio. Al llegar al restaurante de la cita, el padre se levanta y se va sin decir una sola palabra."</strong></p>
+            </div>
+
+            <p><strong>🤔 Especula usando los adverbios de duda:</strong></p>
+            <ul style="margin-left: 20px; margin-top: 10px;">
+                <li><em>A lo mejor...</em> pasó algo grave entre ellos.</li>
+                <li><em>Puede que...</em> el hijo descubriera un secreto.</li>
+                <li><em>Igual...</em> el padre no reconoció a su hijo. ¿Por qué?</li>
+            </ul>
+        </div>
+
+        <!-- PASO 2: CANCIÓN Y ACTIVIDADES LÍRICAS -->
+        <div class="step-card">
+            <div class="step-title">
+                <div class="step-number">2</div>
+                <h2>Escucha la Canción y Trabaja la Letra</h2>
+            </div>
+            
+            <!-- REPRODUCTOR SIN ERRORES DE EMBED -->
+            <div class="video-container">
+                <iframe 
+                    src="https://www.youtube-nocookie.com/embed/S4934O6q074" 
+                    title="Willie Colon - El Gran Varon" 
+                    frameborder="0" 
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                    allowfullscreen>
+                </iframe>
+            </div>
+            <p style="font-size: 0.9rem; color: #666; text-align: center; margin-bottom: 25px;"><em>Puedes buscar la letra completa en Google para seguir toda la canción durante la sesión.</em></p>
+
+            <!-- ACTIVIDAD A: SELECCIONAR -->
+            <h3 style="color: var(--primary); margin-bottom: 10px;">Parte 2A: Selecciona la opción correcta (El Nacimiento)</h3>
+            <div class="lyrics-section">
+                En la sala de un hospital, a los seis meses de gestación,<br>
+                nació el hijo de Doña Josefina y Don Andrés.<br>
+                El niño fue criado con 
+                <select class="select-input">
+                    <option value="">--Selecciona--</option>
+                    <option value="rigor">rigor</option>
+                    <option value="amor">amor</option>
+                    <option value="temor">temor</option>
+                </select> 
+                y con la idea firme<br>
+                de que fuera un 
+                <select class="select-input">
+                    <option value="">--Selecciona--</option>
+                    <option value="gran varón">gran varón</option>
+                    <option value="buen señor">buen señor</option>
+                    <option value="gran doctor">gran doctor</option>
+                </select>.
+            </div>
+
+            <!-- ACTIVIDAD B: RELLENAR HUECOS -->
+            <h3 style="color: var(--primary); margin-bottom: 10px; margin-top: 25px;">Parte 2B: Completa los espacios en blanco (El Viaje)</h3>
+            <div class="word-bank">
+                <strong>Banco de palabras:</strong>
+                <span class="word-tag">marchó</span>
+                <span class="word-tag">cambió</span>
+                <span class="word-tag">soñaba</span>
+            </div>
+            <div class="lyrics-section">
+                A los treinta años Simón se <input type="text" class="fill-input" placeholder="verbo"> a Nueva York,<br>
+                buscando el futuro que tanto <input type="text" class="fill-input" placeholder="verbo">.<br>
+                Pero el mundo da vueltas y en el año 86,<br>
+                Don Andrés viajó y nada de lo que vio <input type="text" class="fill-input" placeholder="verbo">.
+            </div>
+
+            <!-- ACTIVIDAD C: VOCABULARIO Y ASOCIACIÓN -->
+            <h3 style="color: var(--primary); margin-bottom: 10px; margin-top: 25px;">Parte 2C: Relaciona el vocabulario (El Reencuentro)</h3>
+            <p style="font-size: 0.95rem; margin-bottom: 10px;">Asocia cada expresión clave del tema con su significado:</p>
+            <div class="match-grid">
+                <div class="match-card">
+                    <strong>1. "Criado con rigor"</strong>
+                    <select class="select-input" style="width: 100%; margin-top: 5px;">
+                        <option value="">-- Significado --</option>
+                        <option>Educado de forma muy estricta y tradicional</option>
+                        <option>Nacer antes de tiempo en el hospital</option>
+                        <option>Aceptar a las personas tal como son</option>
+                    </select>
+                </div>
+                <div class="match-card">
+                    <strong>2. "Gran varón"</strong>
+                    <select class="select-input" style="width: 100%; margin-top: 5px;">
+                        <option value="">-- Significado --</option>
+                        <option>Expectativa del padre de tener un hijo "macho/fuerte"</option>
+                        <option>Un hombre muy famoso en Nueva York</option>
+                        <option>Un médico importante</option>
+                    </select>
+                </div>
+                <div class="match-card">
+                    <strong>3. "Nace pa' martillo..."</strong>
+                    <select class="select-input" style="width: 100%; margin-top: 5px;">
+                        <option value="">-- Significado --</option>
+                        <option>No se puede luchar contra la verdadera esencia de alguien</option>
+                        <option>Trabajar en construcción</option>
+                        <option>Viajar lejos de la familia</option>
+                    </select>
+                </div>
+                <div class="match-card">
+                    <strong>4. "El mundo da vueltas"</strong>
+                    <select class="select-input" style="width: 100%; margin-top: 5px;">
+                        <option value="">-- Significado --</option>
+                        <option>La vida cambia inesperadamente con el tiempo</option>
+                        <option>Hacer un viaje alrededor del planeta</option>
+                        <option>Estar mareado por la música</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <!-- PASO 3: LÍNEA DEL TIEMPO -->
+        <div class="step-card">
+            <div class="step-title">
+                <div class="step-number">3</div>
+                <h2>La Línea del Tiempo de la Historia</h2>
+            </div>
+            <p>Sigue la secuencia de los hechos a lo largo de los años:</p>
+
+            <div class="timeline">
+                <div class="timeline-item">
+                    <span class="timeline-date">1956 - El Nacimiento</span>
+                    <p>Nace Simón. ¿Qué expectativas tenía su padre Don Andrés? <em>(Que fuera un "gran varón")</em>.</p>
+                </div>
+                <div class="timeline-item">
+                    <span class="timeline-date">1978 - El Viaje</span>
+                    <p>Simón se va a Nueva York a los 22 años. ¿Por qué se marcha de su hogar?</p>
+                </div>
+                <div class="timeline-item">
+                    <span class="timeline-date">1986 - El Reencuentro</span>
+                    <p>Don Andrés viaja a Nueva York. ¿Con quién se encuentra en el restaurante?</p>
+                </div>
+                <div class="timeline-item">
+                    <span class="timeline-date">1989 - El Final</span>
+                    <p>Simón está en el hospital. ¿Qué ocurre con el padre antes de entrar a verlo?</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- PASO 4: ANÁLISIS DE PERSONAJES -->
+        <div class="step-card">
+            <div class="step-title">
+                <div class="step-number">4</div>
+                <h2>Análisis de Personajes y Debate</h2>
+            </div>
+            <p>Discutan las posturas de los dos personajes principales de la canción:</p>
+
+            <div class="character-grid">
+                <div class="char-card">
+                    <h4><i class="fa-solid fa-user-tie"></i> Don Andrés (El Padre)</h4>
+                    <ul>
+                        <li>¿Es una persona mala o una víctima de su época y cultura?</li>
+                        <li>¿Qué habrías hecho tú en su lugar en 1986?</li>
+                    </ul>
+                </div>
+                <div class="char-card">
+                    <h4><i class="fa-solid fa-user-heart"></i> Simón / Simona</h4>
+                    <ul>
+                        <li>¿Por qué nunca le contó la verdad por carta a su padre?</li>
+                        <li>¿Qué sentía Simón en Nueva York durante esos 8 años?</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- PASO 5: REFLEXIÓN CULTURAL -->
+        <div class="step-card">
+            <div class="step-title">
+                <div class="step-number">5</div>
+                <h2>Reflexión Cultural y Refranes</h2>
+            </div>
+            <p>Analicen juntos el significado de esta famosa frase de la salsa:</p>
+
+            <div class="quote-box">
+                "No se puede corregir a la naturaleza... el que nace pa' martillo, del cielo le caen los clavos."
+            </div>
+
+            <p><strong>💬 Para conversar:</strong> ¿Existe algún refrán en tu cultura que hable de la importancia de aceptar a las personas tal como son?</p>
+        </div>
+
+        <!-- PASO 6: TAREA -->
+        <div class="step-card" style="border-left-color: var(--secondary);">
+            <div class="step-title">
+                <div class="step-number" style="background: var(--secondary); color: var(--dark);">📝</div>
+                <h2 style="color: var(--dark);">Tarea Sugerida (Elige una opción)</h2>
+            </div>
+            
+            <div class="homework-option">
+                <h3>Opción A: La carta no enviada (Escritura Creativa)</h3>
+                <p>Escribe una nota corta de Simón a su padre en 1986 (80-100 palabras) explicando por qué cambió su vida. Usa expresiones como <em>"Espero que...", "Ojalá...", "Puede que..."</em>.</p>
+            </div>
+
+            <div class="homework-option">
+                <h3>Opción B: El diario de Don Andrés (Reflexión)</h3>
+                <p>Escribe una entrada del diario de Don Andrés en 1989 expresando su arrepentimiento por haber dejado pasar el tiempo por orgullo.</p>
+            </div>
+
+            <div style="margin-top: 20px;">
+                <label for="tarea-text"><strong>Escribe tu respuesta aquí para la clase:</strong></label>
+                <textarea id="tarea-text" placeholder="Escribe tu texto en español aquí..."></textarea>
+                <button class="btn-submit" onclick="alert('¡Excelente trabajo! Copia este texto y envíaselo a tu profesor.')">Guardar mi Tarea</button>
+            </div>
+        </div>
+
+        <footer>
+            <p>Diseñado para clases interactivas de Español como Lengua Extranjera (ELE) • PROFes</p>
+        </footer>
+
+    </div>
+
+</body>
+</html>
